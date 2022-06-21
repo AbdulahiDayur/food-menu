@@ -5,6 +5,21 @@ import items from "./data";
 
 function App() {
   const [menuData, setMenuData] = useState(items);
+  const [categoryData, setCategoryData] = useState([]);
+
+  function handelBreakfast() {
+    //   console.log("breakfast");
+    //   let breakFastArray = items.filter((obj) => obj.category === "breakfast");
+    //   setCategoryData(breakFastArray);
+    //   <div className="section-center ">
+    //     {categoryData.map((itemObj) => {
+    //       return <Categories key={itemObj.id} {...itemObj} />;
+    //     })}
+    //   </div>;
+    // setMenuData((prevItems) => {
+    //   return prevItems.filter((obj) => obj.category === "breakfast");
+    // });
+  }
   return (
     <main>
       <section className="menu section">
@@ -13,13 +28,15 @@ function App() {
           <div className="underline"></div>
         </div>
         <div className="btn-container">
-          <button>All</button>
+          <button className="filter-btn">All</button>
+          <button onClick={handelBreakfast} className="filter-btn">
+            BreakFast
+          </button>
+          <button className="filter-btn">Lunch</button>
+          <button className="filter-btn">Shakes</button>
         </div>
-        <div className="section-center ">
-          {menuData.map((theFood) => {
-            return <Menu key={theFood.id} {...theFood} />;
-          })}
-        </div>
+        <Categories />
+        <Menu items={menuData} />;
       </section>
     </main>
   );
