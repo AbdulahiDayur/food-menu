@@ -3,13 +3,19 @@ import Menu from "./Menu";
 import Categories from "./Categories";
 import items from "./data";
 
+let itemButton = ["All", ...new Set(items.map((obj) => obj.category))];
+
 function App() {
   const [menuData, setMenuData] = useState(items);
-  // const [categoryData, setCategoryData] = useState([]);
+  const [categoryData, setCategoryData] = useState(itemButton);
 
   function filterItems(categoryName) {
-    let breakFastArray = items.filter((obj) => obj.category === categoryName);
-    setMenuData(breakFastArray);
+    if (categoryName === "All") {
+      setMenuData(items);
+      return;
+    }
+    let newMenuArray = items.filter((obj) => obj.category === categoryName);
+    setMenuData(newMenuArray);
   }
 
   return (
@@ -19,7 +25,7 @@ function App() {
           <h2>Our Menu</h2>
           <div className="underline"></div>
         </div>
-        <Categories filterItems={filterItems} />
+        <Categories filterItems={filterItems} itemButton={categoryData} />
         <Menu items={menuData} />
       </section>
     </main>
